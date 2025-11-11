@@ -1,0 +1,81 @@
+import io
+import nltk
+nltk.download("punkt")
+nltk.download("stopwords")
+
+
+
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+from nltk.stem import PorterStemmer
+
+
+
+stop_words = set(stopwords.words('english'))
+ps = PorterStemmer()
+
+
+
+# Read original file
+file1 = open("C:/Desktop Dummy/ml practicals/sample.txt")
+line = file1.read()
+
+
+
+print(line)
+
+
+# Split into words (YOUR ORIGINAL LOGIC)
+words = line.split()
+
+
+
+print(words)
+
+
+print(f"Before Removing Stop Words : \n{words}\n Length : {len(words)}")
+
+
+
+open('C:/Desktop Dummy/ml practicals/output_filteredtext.txt', 'w').close()
+
+
+
+for r in words:
+    if not r in stop_words:     # CASE-SENSITIVE CHECK (This keeps length = 31)
+        appendFile = open("C:/Desktop Dummy/ml practicals/output_filteredtext.txt",'a')
+        appendFile.write(" "+r)
+        appendFile.close()
+
+
+
+# Read filtered result from file (YOUR FLOW)
+file2 = open("C:/Desktop Dummy/ml practicals/output_filteredtext.txt")
+line2 = file2.read()
+filtered_words = line2.split()
+
+
+
+print(f"\nAfter Removing Stop Words : \n{filtered_words}\nLength : {len(filtered_words)}")
+
+
+
+import string
+stemmed_list = []
+
+for w in filtered_words:
+    # remove punctuation like '.', ',', etc.
+    cleaned_word = w.strip(string.punctuation)
+
+    # stemming
+    stemmed_word = ps.stem(cleaned_word)
+
+    stemmed_list.append(stemmed_word)
+
+
+
+
+print(f"\nAfter Stemming : \n{stemmed_list}\nLength : {len(stemmed_list)}")
+
+
+

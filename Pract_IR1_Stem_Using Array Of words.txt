@@ -1,0 +1,28 @@
+# stop word removal and stemming on Array of words
+
+
+import nltk
+nltk.download("punkt")
+from nltk.tokenize import word_tokenize
+from nltk.stem import PorterStemmer
+
+
+ps = PorterStemmer()
+
+
+sample = ['program', 'programmer', 'programming', 'programs', 'programmers']
+
+for s in sample:
+    print(f"{s} : {ps.stem(s)}")
+
+
+sentence = "Programmers program with different programming languages"
+words = word_tokenize(sentence)
+print(words)
+
+
+for w in words:
+    print(f"{w} : {ps.stem(w)}")
+
+
+

@@ -1,0 +1,57 @@
+#  Stop word removal and Stemming on Text
+
+import nltk
+from nltk.corpus import stopwords
+nltk.download("stopwords")
+nltk.download("punkt") 
+print(stopwords.words('english'))
+
+
+
+# stopwords removal in sample piece of text
+
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+from nltk.stem import PorterStemmer
+
+
+
+data = "India is emerging as a global leader in Information Technology and Artificial Intelligence"
+
+stop_words = set(stopwords.words('english'))
+word_tokens = word_tokenize(data)
+
+print(word_tokens)
+
+
+
+
+# filtered_sentence = [w for w in word_tokens if not w.lower() in stop_words] - list comprehension
+filtered_sentence = []
+for w in word_tokens:
+    if w.lower() not in stop_words:
+        filtered_sentence.append(w)
+
+print(f"Case insensitive stop word removal : \n {filtered_sentence}")
+
+
+
+# Step 3: Apply Stemming
+ps = PorterStemmer()
+stemmed_words = []
+
+for w in filtered_sentence:
+    stemmed_words.append(ps.stem(w))
+
+
+
+
+print(" STEMMING RESULT : ")
+print("\n")
+print("Original sentence: \n", data)
+print("\n")
+print("Stemming Result On Original Sentence After Stop Word Operation: \n", stemmed_words)
+
+
+
+
