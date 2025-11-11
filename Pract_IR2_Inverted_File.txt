@@ -1,0 +1,57 @@
+
+import string   # removing punctuation
+
+
+# Two sample documents
+document1 = "The quick brown fox jumped over the lazy dog."
+document2 = "The lazy dog slept in the sun."
+
+
+# STEP 1: Preprocess documents (convert to lowercase & remove punctuation)
+
+doc1_clean = document1.lower().translate(str.maketrans('', '', string.punctuation))
+doc2_clean = document2.lower().translate(str.maketrans('', '', string.punctuation))
+
+
+
+# STEP 2: Tokenization (split into words)
+
+tokens1 = doc1_clean.split()
+tokens2 = doc2_clean.split()
+
+print("Tokens from Document 1:", tokens1)
+print("\n")
+print("Tokens from Document 2:", tokens2)
+
+
+
+# STEP 3: Create list of unique terms
+
+terms = list(set(tokens1 + tokens2))
+print("\nUnique Terms:", terms)
+
+
+
+# STEP 4: Create Inverted Index
+
+inverted_index = {}
+
+for term in terms:
+    documents = []
+    if term in tokens1:
+        documents.append("Document 1")
+    if term in tokens2:
+        documents.append("Document 2")
+
+    inverted_index[term] = documents
+
+
+
+# STEP 5: Display Inverted Index
+
+print("\n===== Inverted Index =====")
+for term, docs in inverted_index.items():
+    print(f"{term} -> {', '.join(docs)}")
+
+
+ 
